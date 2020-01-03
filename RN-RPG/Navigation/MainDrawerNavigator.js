@@ -76,9 +76,10 @@ import {BattleScreenTest, HomeScreen, InventoryScreen, PartyScreen, QuestScreen,
     {
       contentComponent: drawer_nav,
       drawerWidth: '75%',
-      drawerPosition: 'left',
+      drawerPosition: 'left', 
       initialRouteName: 'HomeScreen',
-    }
+      unmountInactiveRoutes : true
+    },
   );
   
   
