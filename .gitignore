@@ -7,7 +7,6 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
-*.zip
 web-build/
 web-report/
 FFRK Game Assets/
