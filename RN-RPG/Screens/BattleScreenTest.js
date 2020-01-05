@@ -44,7 +44,7 @@ export default class BattleScreenTest extends Component {
        backgroundColor : 'black'
      }}>
      <ImageBackground
-    source={require('../assets/img_10003_01_03.png')}
+    source={require('../assets/Backgrounds/GrassyPlains.png')}
     style={{
       width : '100%',
       height: '100%',
@@ -61,32 +61,32 @@ export default class BattleScreenTest extends Component {
           >
             <Image
             style={{height : 100, width : 100, paddingBottom : 10}}
-            source={require('../assets/dummy_enemy.png')}/>
+            source={require('../assets/Characters/dummy_enemy.png')}/>
           </TouchableHighlight>
           <Image
           style={{height : 100, width : 100, opacity : 0}}
-          source={require('../assets/dummy_enemy.png')}/>
+          source={require('../assets/Characters/dummy_enemy.png')}/>
           <Image
           style={{height : 100, width : 100, opacity : 0}}
-          source={require('../assets/dummy_enemy.png')}/>
+          source={require('../assets/Characters/dummy_enemy.png')}/>
           <Image
           style={{height : 100, width : 100, opacity : 1}}
-          source={require('../assets/dummy_enemy.png')}/>
+          source={require('../assets/Characters/dummy_enemy.png')}/>
         </View>
 
         <View style={{flex: 1, backgroundColor : 'blue', justifyContent: 'space-evenly' }}>
         <Image
           style={{height : 100, width : 100, opacity: 0, paddingBottom : 10}}
-          source={require('../assets/dummy_enemy.png')}/>
+          source={require('../assets/Characters/dummy_enemy.png')}/>
           <Image
           style={{height : 100, width : 100, opacity : 1}}
-          source={require('../assets/dummy_enemy.png')}/>
+          source={require('../assets/Characters/dummy_enemy.png')}/>
           <Image
           style={{height : 100, width : 100, opacity : 1}}
-          source={require('../assets/dummy_enemy.png')}/>
+          source={require('../assets/Characters/dummy_enemy.png')}/>
           <Image
           style={{height : 100, width : 100, opacity : 0}} 
-          source={require('../assets/dummy_enemy.png')}/>
+          source={require('../assets/Characters/dummy_enemy.png')}/>
         </View>
 
         <View style={{flex: 1, backgroundColor : 'green' }}>

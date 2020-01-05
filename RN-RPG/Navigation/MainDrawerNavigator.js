@@ -16,7 +16,7 @@ import {BattleScreenTest, HomeScreen, InventoryScreen, PartyScreen, QuestScreen,
       <SafeAreaView style={{ flex: 1, backgroundColor : '#964b00' }}>
         <View style={{ height: 275 }}>
           <View style={{height: 250, alignItems: 'center', justifyContent: 'center' }}>
-            <Image source={require('../assets/cure.png')} style={{height: 185, width: 190, borderRadius: 50 }} />
+            <Image source={require('../assets/Spells/cure.png')} style={{height: 185, width: 190, borderRadius: 50 }} />
           </View>
           <View style={{height: 50, alignItems: 'center', justifyContent: 'center' }}>
             <Text style={{height : 75, fontSize: 20, fontWeight: 'bold'}} >MENU</Text>

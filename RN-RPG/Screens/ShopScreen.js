@@ -1,16 +1,7 @@
 import React, {Component} from 'react'
-import { Dimensions, Text, View, StyleSheet, Button, FlatList, ScrollView } from 'react-native'
-import Constants from 'expo-constants';
-import {ButtonGroup, Header, Icon, ListItem} from 'react-native-elements'
-import { TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler';
-
-  function Item({ title }) {
-    return (
-        <View style={styles.item}>
-        <Text style={styles.itemText}>{title}</Text>
-      </View>
-    );
-  }
+import { Dimensions, Text, View, StyleSheet, FlatList, ImageBackground } from 'react-native'
+import {Button, ButtonGroup, Icon, Header} from 'react-native-elements'
+import {TouchableHighlight } from 'react-native-gesture-handler';
 
 export default class HomeScreen extends Component {
 
@@ -20,6 +11,7 @@ export default class HomeScreen extends Component {
             selectedIndex : 0,
             selectedItemName : " ",
             selectedItemPrice : 0,
+            playersGold : 1000,
             buttonSelected : 'items',
             dummyItems : [
                 {name: 'a', price: 100},
@@ -82,24 +74,50 @@ export default class HomeScreen extends Component {
         })
     }
 
+    purchaseItem(){
+        if(this.state.playersGold > this.state.selectedItemPrice){
+            var newGoldPrice = this.state.playersGold - this.state.selectedItemPrice
+            this.setState({playersGold : newGoldPrice})
+        }
+    }
+
     component1 = () => <Text>Weapons and Armor</Text>
-    component2 = () => <Text>Spells</Text>
+    component2 = () => <Text>Abilities</Text>
 
     renderItem(item){
-        <ListItem
-            title={item.name}
-            subtitle={item.price}
-        />
+        return(
+            <TouchableHighlight onPress={() => this.updateShopSummayScreen(item)}>
+                <View style={styles.item}>
+                    <ImageBackground
+                    style={{height: '100%', width: '100%'}}
+                    source={require('../assets/Items/Swords/sword.png')}>
+                        <View style={{flex: 1, alignItems: 'center', justifyContent : 'space-between'}}>
+                            <Text adjustsFontSizeToFit style={styles.itemText}>Federation Signet Staff (XI)</Text>
+                            <Text style={styles.itemText}>{item.price}</Text>
+                        </View>
+                    </ImageBackground>
+                </View>
+            </TouchableHighlight>
+        );
+    }
+
+    renderCurrencies(){
+        return(
+            <View style={{flex:1}}>
+                <Text>GOLD: {this.state.playersGold}</Text>
+            </View> 
+        );
     }
 
     render(){
         const buttons = [{element: this.component1}, {element: this.component2}]
         const {selectdIndex} = this.state
         return(
-            <View style={{paddingTop: 25, flex: 1}}>
+            <View style={{ paddingTop: 25, flex: 1}}>
                 <Header
                     leftComponent={{ icon: 'menu', color: '#fff', onPress: () => this.props.navigation.openDrawer() }}
                     centerComponent = {{text: 'SHOP', style : {color : '#fff'}}}
+                    rightComponent={this.renderCurrencies()}
                 />
                 <ButtonGroup
                     onPress={(index) => this.updateIndex(index)}
@@ -110,37 +128,49 @@ export default class HomeScreen extends Component {
                 <View style = {{flex : 1}}>
                     <View
                     style={{flex: 4}}>
-                        <Text>this will be shop screen</Text>
                         <FlatList
-                            numColumns={3}
+                            numColumns={4}
                             data={this.getData()}
                             style={{
                                 flex : 1,
-                                marginVertical : 20
+                                marginVertical : 10,
+                                //alignItems : 'center'
                             }}
-                            renderItem={({ item }) =>
-                            
-                            <TouchableHighlight onPress={() => this.updateShopSummayScreen(item)}>
-                                <View style={styles.item}>
-                                    <Text style={styles.itemText}>{item.name}</Text>
-                                </View>
-                            </TouchableHighlight>
-                            }
-                        />
-                            
+                            renderItem={({ item }) => this.renderItem(item)}
+                        /> 
                     </View>
 
-                    <View
-                    style={{flex:3}}>
-                        <Text>this will be summary screen</Text>
-                        <View style={styles.checkOutBox}>
-                            <View style={{flex:1}}>
-                                <Text>{this.state.selectedItemName}</Text>
-                                <Text>{this.state.selectedItemPrice}</Text>
+                    <View style={{flex:3}}>
+
+                            <View style={styles.checkOutBox}>
+                                <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                                    
+                                <Text style={{paddingBottom: 10}}>NAME : {this.state.selectedItemName}</Text>
+                                    <Text>COST: {this.state.selectedItemPrice} </Text>
+                                </View>
+                                <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                                    <Text>HEALTH: +0 </Text>
+                                    <Text>ATTACK: +0</Text>
+                                    <Text>RESISTANCE: +0</Text>
+                                </View>
+                                <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                                    <Text>DEFENCE: +0</Text>
+                                    <Text>MAGIC: +0</Text>
+                                    <Text>MIND: +0</Text>
+                                </View>
+                                <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                                    <Text>LUCK: +0 </Text>
+                                    <Text>SPEED: +0</Text>
+                                    <Text>COPIES OWNED: 0</Text>
+                                </View>
                             </View>
+                            <Button
+                            onPress={() => this.purchaseItem()}
+                            style={{flex: 2, paddingVertical: 10}}
+                            title= {this.state.playersGold > this.state.selectedItemPrice ? "PURCHASE" : "INSUFFICIENT FUNDS"}
+                            />
                         </View>
                     </View>
-                </View>
             </View>
         )
     }
@@ -160,9 +190,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        margin: 1,
-        height: Dimensions.get('window').width / 3, // approximate a square
-        width : Dimensions.get('window').width/3,
+        margin: 1/5,
+        height: Dimensions.get('window').width /4, // approximate a square
+        width : Dimensions.get('window').width/4,
       },
     title: {
         fontSize: 32,
@@ -174,10 +204,12 @@ const styles = StyleSheet.create({
         color: '#fff'
     },
     checkOutBox : {
-        flex : 1,
+        flex : 3,
         backgroundColor : '#D3D3D3',
         borderRadius: 4,
         borderWidth: 10,
-        borderColor : '#000000'
+        borderColor : '#000000',
+        flexDirection: 'column',
+        justifyContent: 'space-evenly'
     }
 })
