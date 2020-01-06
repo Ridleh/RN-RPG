@@ -115,6 +115,7 @@ export default class HomeScreen extends Component {
         return(
             <View style={{ paddingTop: 25, flex: 1}}>
                 <Header
+                    containerStyle={{backgroundColor: '#964b00'}}
                     leftComponent={{ icon: 'menu', color: '#fff', onPress: () => this.props.navigation.openDrawer() }}
                     centerComponent = {{text: 'SHOP', style : {color : '#fff'}}}
                     rightComponent={this.renderCurrencies()}
