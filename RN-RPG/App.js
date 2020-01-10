@@ -5,11 +5,27 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import AppNavigator from './Navigation/AppNavigator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-//import * as firebase from 'firebase';
-//import { firebaseConfig } from './config';
+import {Provider} from 'react-redux';
+import { createStore } from 'redux';
+//import {store} from './Redux/Store/index';
 
-//firebase.initializeApp(firebaseConfig)
-//console.disableYellowBox = true;
+const initalState = {
+  counter : 0
+}
+
+const reducer = (state = initalState, action ) => {
+  //console.log(action)
+  switch(action.type){
+    case 'increaseCounter':
+      return{counter: state.counter+1}
+
+    case 'decreaseCounter':
+      return{counter: state.counter-1}
+  }
+  return state;
+}
+
+const store = createStore(reducer)
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -24,10 +40,13 @@ export default function App(props) {
     );
   } else {
     return (
+      <Provider store={store}>
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <AppNavigator />
       </View>
+      </Provider>
+      
     );
   }
 }

@@ -101,7 +101,7 @@ export default class HomeScreen extends Component {
                     containerStyle={{backgroundColor: '#964b00',}}
                     leftComponent={{ icon: 'menu', color: '#fff', onPress: () => this.props.navigation.openDrawer() }}
                     centerComponent = {{text: 'PARTY', style : {color : '#fff'}}}
-                />
+                    />
                 
 
                 <View

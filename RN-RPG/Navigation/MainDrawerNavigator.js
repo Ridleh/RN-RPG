@@ -13,7 +13,7 @@ import {BattleScreenTest, HomeScreen, InventoryScreen, PartyScreen, QuestScreen,
 
   const drawer_nav = (props) => {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor : '#964b00' }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor : '#585858' }}>
         <View style={{ height: 275 }}>
           <View style={{height: 250, alignItems: 'center', justifyContent: 'center' }}>
             <Image source={require('../assets/Spells/cure.png')} style={{height: 185, width: 190, borderRadius: 50 }} />

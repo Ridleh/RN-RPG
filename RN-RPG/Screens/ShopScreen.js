@@ -2,6 +2,11 @@ import React, {Component} from 'react'
 import { Dimensions, Text, View, StyleSheet, FlatList, ImageBackground } from 'react-native'
 import {Button, ButtonGroup, Icon, Header} from 'react-native-elements'
 import {TouchableHighlight } from 'react-native-gesture-handler';
+import {swordDatabase, staffDatabase, blackMagicSpellsDatabase} from '../ItemsAndSpells/ItemsAndSpellsDatabase';
+//import {swordDatabase} from '../ItemsAndSpells/Weapons/Swords'
+//import {staffDatabase} from '../ItemsAndSpells/Weapons/Staffs'
+
+
 
 export default class HomeScreen extends Component {
 
@@ -13,49 +18,29 @@ export default class HomeScreen extends Component {
             selectedItemPrice : 0,
             playersGold : 1000,
             buttonSelected : 'items',
-            dummyItems : [
-                {name: 'a', price: 100},
-                {name: 'b', price: 200},
-                {name: 'c', price: 300},
-                {name: 'd', price: 400},
-                {name: 'e', price: 500},
-                {name: 'f', price: 600},
-                {name: 'aa', price: 10},
-                {name: 'bb', price: 20},
-                {name: 'cc', price: 30},
-                {name: 'dd', price: 40},
-                {name: 'ee', price: 50},
-                {name: 'ff', price: 60},
-                {name: 'a', price: 1},
-                {name: 'b', price: 2},
-                {name: 'c', price: 3},
-                {name: 'd', price: 4},
-                {name: 'e', price: 5},
-                {name: 'f', price: 6},
-                {name: 'aa', price: 11},
-                {name: 'bb', price: 120},
-                {name: 'cc', price: 130},
-                {name: 'dd', price: 140},
-                {name: 'ee', price: 150},
-                {name: 'ff', price: 16},
-              ],
-            dummySpells : [
-                {name: 'g', price: 100},
-                {name: 'h', price: 200},
-                {name: 'i', price: 300},
-                {name: 'j', price: 400},
-                {name: 'k', price: 500},
-                {name: 'l', price: 600},
-              ],
+            dummyItems : [],
+            dummySpells : [],
         }
     }
 
     componentDidMount(){
-        console.log('componentDidMount - Shop')
+        //console.log('componentDidMount - Shop')
+        //console.log(this.state.swords)
+        var swords = swordDatabase.slice()
+        var staffs = staffDatabase.slice()
+        var weaponsAndArmor = [...swords,...staffs]
+
+        var blackMagicSpells = blackMagicSpellsDatabase.slice()
+        var spells = [...blackMagicSpells]
+
+        this.setState({
+            dummyItems : weaponsAndArmor,
+            dummySpells : spells
+        })
     }
 
     componentWillUnmount(){
-        console.log('componentWillUnmount - Shop')
+        //console.log('componentWillUnmount - Shop')
     }
 
     getData(){
@@ -90,9 +75,9 @@ export default class HomeScreen extends Component {
                 <View style={styles.item}>
                     <ImageBackground
                     style={{height: '100%', width: '100%'}}
-                    source={require('../assets/Items/Swords/sword.png')}>
+                    source={item.image}>
                         <View style={{flex: 1, alignItems: 'center', justifyContent : 'space-between'}}>
-                            <Text adjustsFontSizeToFit style={styles.itemText}>Federation Signet Staff (XI)</Text>
+        <Text adjustsFontSizeToFit style={styles.itemText}>{item.name}</Text>
                             <Text style={styles.itemText}>{item.price}</Text>
                         </View>
                     </ImageBackground>
