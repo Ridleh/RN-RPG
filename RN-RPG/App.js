@@ -8,7 +8,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Provider} from 'react-redux';
 import { createStore } from 'redux';
 //import {store} from './Redux/Store/index';
-
+import inventoryReducer from './Redux/Reducers/InventoryReducer'
+/*
 const initalState = {
   counter : 0
 }
@@ -25,7 +26,28 @@ const reducer = (state = initalState, action ) => {
   return state;
 }
 
-const store = createStore(reducer)
+
+const buyItem = 'buyItem';
+
+const inventoryState = {
+    items: [],
+    spells: []
+}
+
+function inventoryReducer(state = inventoryState, action){
+  console.log(state.items.length)
+    switch(action.type){
+        case buyItem:
+            return{
+                ...state,
+                items: [...state.items, action.item]
+            }
+        default : return state;
+    }
+}
+*/
+
+const store = createStore(inventoryReducer)
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);

@@ -3,17 +3,17 @@ import { Dimensions, Text, View, StyleSheet, FlatList, ImageBackground } from 'r
 import {Button, ButtonGroup, Icon, Header} from 'react-native-elements'
 import {TouchableHighlight } from 'react-native-gesture-handler';
 import {swordDatabase, staffDatabase, blackMagicSpellsDatabase} from '../ItemsAndSpells/ItemsAndSpellsDatabase';
+import {connect} from 'react-redux'
 //import {swordDatabase} from '../ItemsAndSpells/Weapons/Swords'
 //import {staffDatabase} from '../ItemsAndSpells/Weapons/Staffs'
 
-
-
-export default class HomeScreen extends Component {
+class ShopScreen extends Component {
 
     constructor(props){
         super(props)
         this.state={
             selectedIndex : 0,
+            selectedItem : {},
             selectedItemName : " ",
             selectedItemPrice : 0,
             playersGold : 1000,
@@ -54,6 +54,7 @@ export default class HomeScreen extends Component {
 
     updateShopSummayScreen(selectedItem){
         this.setState({
+            selectedItem,
             selectedItemName : selectedItem.name,
             selectedItemPrice : selectedItem.price 
         })
@@ -64,6 +65,8 @@ export default class HomeScreen extends Component {
             var newGoldPrice = this.state.playersGold - this.state.selectedItemPrice
             this.setState({playersGold : newGoldPrice})
         }
+
+        this.props.buyItem(this.state.selectedItem)
     }
 
     component1 = () => <Text>Weapons and Armor</Text>
@@ -199,3 +202,27 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     }
 })
+
+
+function mapStateToProps(state){
+    return{
+        selectedIndex : 0,
+        selectedItem: {},
+        selectedItemName : " ",
+        selectedItemPrice : 0,
+        playersGold : 1000,
+        buttonSelected : 'items',
+        dummyItems : [],
+        dummySpells : [],
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    //console.log('printing dispatch',dispatch)
+    return{
+        buyItem: (item) => dispatch({type: 'buyItem', item: item}),
+        //decreaseCounter: () => dispatch({type: 'decreaseCounter', name :'test2'})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopScreen)

@@ -45,17 +45,17 @@ class HomeScreen extends Component {
                 <Text>Home Screen</Text>
                 <Button
                 title='Increase'
-                onPress={() => this.props.increaseCounter()}/>
-                <Text>{this.props.counter}</Text>
+                onPress={() => this.state.increaseCounter()}/>
+                <Text>{this.state.counter}</Text>
                 <Button
                 title='Decrease'
-                onPress={() => this.props.decreaseCounter()}/>
+                onPress={() => this.state.decreaseCounter()}/>
                 </ImageBackground>
             </View>
         )
     }
 }
-
+/*
 function mapStateToProps(state){
     return{
         counter : state.counter
@@ -70,3 +70,5 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+*/
+export default HomeScreen
