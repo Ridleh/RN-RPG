@@ -6,9 +6,10 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import AppNavigator from './Navigation/AppNavigator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Provider} from 'react-redux';
-import { createStore } from 'redux';
+import store from './Redux/Store'
+//import { createStore } from 'redux';
 //import {store} from './Redux/Store/index';
-import inventoryReducer from './Redux/Reducers/InventoryReducer'
+//import inventoryReducer from './Redux/Reducers/InventoryReducer'
 /*
 const initalState = {
   counter : 0
@@ -47,7 +48,7 @@ function inventoryReducer(state = inventoryState, action){
 }
 */
 
-const store = createStore(inventoryReducer)
+// store = createStore(inventoryReducer)
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);

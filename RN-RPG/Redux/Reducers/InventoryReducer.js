@@ -1,4 +1,6 @@
 const buyItem = 'buyItem';
+const getItems = 'getItems'
+const buySpell = 'buySpell'
 
 const inventoryState = {
     items: [],
@@ -6,13 +8,19 @@ const inventoryState = {
 }
 
 function inventoryReducer(state = inventoryState, action){
-    console.log(state.items.length)
+    //console.log(state.items.length)
       switch(action.type){
-          case buyItem:
-              return{
-                  ...state,
-                  items: [...state.items, action.item]
+            case buyItem:
+                return{
+                    ...state,
+                    items: [...state.items, action.item]
               }
+            case buySpell: 
+                return{
+                    ...state,
+                    spells: [...state.spells, action.spell]
+                }
+
           default : return state;
       }
   }

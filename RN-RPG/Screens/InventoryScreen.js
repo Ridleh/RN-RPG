@@ -1,48 +1,32 @@
 import React, {Component} from 'react'
 import { StyleSheet, TouchableHighlight, Text, View, Dimensions, ImageBackground, FlatList } from 'react-native'
 import { Header, ButtonGroup } from 'react-native-elements'
+import { connect } from 'react-redux'
+import store from '../Redux/Store'
+
+
 
 const {height, width} = Dimensions.get('window')
 
-export default class InventoryScreen extends Component {
+class InventoryScreen extends Component {
 
     constructor(props){
+        //console.log('2')
         super(props)
-        this.state ={
-            selectedIndex : 0,
-            weapons : [
-                {name: 'weapon I', price: 100},
-                {name: 'weapon II', price: 200},
-                {name: 'weapon III', price: 300},
-                {name: 'weapon IV', price: 400},
-                {name: 'weapon V', price: 500},
-                {name: 'weapon VI', price: 600},
-            ],
-            armors : [
-                {name: 'armor I', price: 100},
-                {name: 'armor II', price: 200},
-                {name: 'armor III', price: 300},
-                {name: 'armor IV', price: 400},
-                {name: 'armor V', price: 500},
-                {name: 'armor VI', price: 600},
-            ],
-            spells : [
-                {name: 'spell I', price: 100},
-                {name: 'spell II', price: 200},
-                {name: 'spell III', price: 300},
-                {name: 'spell IV', price: 400},
-                {name: 'spell V', price: 500},
-                {name: 'spell VI', price: 600},
-            ],
-            other : [
-                {name: 'g', price: 100},
-                {name: 'h', price: 200},
-                {name: 'i', price: 300},
-                {name: 'j', price: 400},
-                {name: 'k', price: 500},
-                {name: 'l', price: 600},
-            ],
+        this.state = {
+            selectedIndex: 0
         }
+    }
+
+    componentDidMount(){
+        //console.log('2')
+        //console.log(this.props.getItems())
+        //this.props.weapons = this.props.getItems();
+        //var state = store.getState()
+        //console.log(state)
+        //this.state.weapons = state.items
+        //this.setState({ weapons : state.items})
+        //this.props.selectedIndex = 2;
     }
 
     updateIndex(selectedIndex){
@@ -51,16 +35,16 @@ export default class InventoryScreen extends Component {
 
     getData(){
         if(this.state.selectedIndex === 0){
-            return this.state.weapons
+            return this.props.weapons
         }
         else if(this.state.selectedIndex === 1){
-            return this.state.armors
+            return this.props.weapons
         }
         else if(this.state.selectedIndex === 2){
-            return this.state.spells
+            return this.props.spells
         }
         else{
-            return this.state.other
+            return this.props.spells
         }
     }
 
@@ -70,7 +54,7 @@ export default class InventoryScreen extends Component {
                 <View style={styles.item}>
                     <ImageBackground
                     style={{height: '100%', width: '100%'}}
-                    source={require('../assets/Items/Swords/sword.png')}>
+                    source={item.image}>
                         <View style={{flex: 1, alignItems: 'center', justifyContent : 'space-between'}}>
         <Text adjustsFontSizeToFit style={styles.itemText}>{item.name}</Text>
                             <Text style={styles.itemText}>{item.price}</Text>
@@ -157,3 +141,24 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     }
 })
+
+function mapStateToProps(state){
+    //console.log('1')
+    return{
+        selectedIndex : 0,
+            weapons : store.getState().items,
+            spells: store.getState().spells,
+            other: []
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    //console.log('printing dispatch',dispatch)
+    return{
+        getItems: () => dispatch({type: 'getItems'}),
+        buyItem: (item) => dispatch({type: 'buyItem', item: item}),
+        //decreaseCounter: () => dispatch({type: 'decreaseCounter', name :'test2'})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InventoryScreen)

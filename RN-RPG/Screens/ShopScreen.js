@@ -66,7 +66,15 @@ class ShopScreen extends Component {
             this.setState({playersGold : newGoldPrice})
         }
 
-        this.props.buyItem(this.state.selectedItem)
+        if(this.state.selectedItem.type === 'Sword'){
+            this.props.buyItem(this.state.selectedItem)
+        }
+        else if(this.state.selectedItem.type === 'Staff'){
+            this.props.buyItem(this.state.selectedItem)
+        }
+        else if(this.state.selectedItem.type === 'Black Magic'){
+            this.props.buySpell(this.state.selectedItem)
+        }
     }
 
     component1 = () => <Text>Weapons and Armor</Text>
@@ -221,6 +229,7 @@ function mapDispatchToProps(dispatch){
     //console.log('printing dispatch',dispatch)
     return{
         buyItem: (item) => dispatch({type: 'buyItem', item: item}),
+        buySpell: (spell) => dispatch({type: 'buySpell', spell: spell})
         //decreaseCounter: () => dispatch({type: 'decreaseCounter', name :'test2'})
     }
 }
