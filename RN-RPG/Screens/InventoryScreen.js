@@ -146,8 +146,8 @@ function mapStateToProps(state){
     //console.log('1')
     return{
         selectedIndex : 0,
-            weapons : store.getState().items,
-            spells: store.getState().spells,
+            weapons : state.items,
+            spells: state.spells,
             other: []
     }
 }
